@@ -62,6 +62,5 @@
 		<module>trade-app-jpa</module>
 		<module>trade-app-activemq</module>
 		<module>trade-app-kafka</module>
-		<module>trade-app-frontend</module>
 	</modules>
 </project>
