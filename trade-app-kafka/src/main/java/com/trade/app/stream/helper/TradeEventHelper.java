@@ -14,14 +14,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.trade.app.vo.TradeMessageVO;
 
-
 @Component
 public class TradeEventHelper {
 
 	private ObjectMapper objectMapper;
 
 	public static final Logger LOGGER = LoggerFactory.getLogger(TradeEventHelper.class);
-	
+
 	public static final String EVENT_TYPE = "EVENT_TYPE";
 
 	@Autowired
@@ -29,17 +28,16 @@ public class TradeEventHelper {
 		this.objectMapper = objectMapper;
 
 	}
-	
+
 	public TradeMessageVO getPayload(String eventMessage) {
 		TradeMessageVO payload = null;
 		try {
-			payload = objectMapper.readValue(eventMessage,TradeMessageVO.class);
+			payload = objectMapper.readValue(eventMessage, TradeMessageVO.class);
 		} catch (JsonProcessingException e) {
 			LOGGER.error(e.getMessage());
 		}
 		return payload;
 	}
-	
 
 	public Optional<Message> getMessage(Serializable checksheetRespnse) {
 		String eventMessage = null;
@@ -53,7 +51,7 @@ public class TradeEventHelper {
 	}
 
 	public Optional<Message> buildMessage(String eventMessage) {
-		return Optional.ofNullable(MessageBuilder.withPayload(eventMessage).setHeader("USER_ID", "TRADE")
+		return Optional.ofNullable(MessageBuilder.withPayload(eventMessage).setHeader("USER_ID", "TRADE_TEST")
 				.setHeader(EVENT_TYPE, "tradeEventPush").build());
 	}
 

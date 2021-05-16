@@ -1,6 +1,7 @@
 package com.trade.app.vo;
 
-import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -13,10 +14,9 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class TradeMessageVO implements Serializable {
+public class TradeDisplayVO {
 
-	@JsonProperty("version")
-	private Integer version;
+	private int version;
 
 	@JsonProperty("trade_id")
 	private String tradeIdentifier;
@@ -25,10 +25,10 @@ public class TradeMessageVO implements Serializable {
 	private String countryPartyIdentifier;
 
 	@JsonProperty("maturity_date")
-	private String maturityDate;
+	private LocalDate maturityDate;
 
 	@JsonProperty("created_date")
-	private String createdDate;
+	private LocalDate createdDate;
 
 	@JsonProperty("lastupdated_user")
 	private String lastupdateUser;
@@ -37,5 +37,11 @@ public class TradeMessageVO implements Serializable {
 	private String isExpired;
 
 	@JsonProperty("booked_id")
-	private String bookingIdentifier;	
+	private String bookingIdentifier;
+
+	@JsonProperty("lastupdated_time")
+	private LocalDateTime lastupdateTime;
+	
+	@JsonProperty("id")
+	private long id;
 }

@@ -43,7 +43,7 @@ public class TradeEventListener {
 	public void handleTradeEvent(@Payload String payload) {
 		if (payload != null) {
 			TradeMessageVO tradeMessageVO= tradeEventHelper.getPayload(payload);
-			controller.saveTrade(tradeMessageVO);
+			controller.saveTrade(tradeMessageVO,payload);
 		}
 	}
 
