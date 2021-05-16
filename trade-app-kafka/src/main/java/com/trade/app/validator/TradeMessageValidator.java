@@ -29,9 +29,9 @@ public class TradeMessageValidator {
 		List<ErrorVO> listErrors = new ArrayList<>();
 		validateDateFormat(messageVO.getCreatedDate(), listErrors);
 		validateDateFormat(messageVO.getMaturityDate(), listErrors);
-		validateExpiredText(messageVO.getMaturityDate(), listErrors);
-		validateCountryId(messageVO.getMaturityDate(), listErrors);
-		validatBookingId(messageVO.getMaturityDate(), listErrors);
+		validateExpiredText(messageVO.getIsExpired(), listErrors);
+		validateCountryId(messageVO.getCountryPartyIdentifier(), listErrors);
+		validatBookingId(messageVO.getBookingIdentifier(), listErrors);
 		validateCreateDateToMaturityId(messageVO.getMaturityDate(), messageVO.getCreatedDate(), listErrors);
 		validateTradeId(messageVO.getTradeIdentifier(), listErrors);
 		return listErrors;

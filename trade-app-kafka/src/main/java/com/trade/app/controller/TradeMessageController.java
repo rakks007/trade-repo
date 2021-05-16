@@ -2,6 +2,7 @@ package com.trade.app.controller;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class TradeMessageController {
 	 */
 	public void saveTrade(TradeMessageVO tradeMessageVO, String payload) {
 		List<ErrorVO> errors = TradeMessageValidator.validate(tradeMessageVO);
-		if (errors == null) {
+		if (errors == null || errors.isEmpty()) {
 			populateTradeAndSave(tradeMessageVO);
 		}
 		populateTradeMessageAndSave(tradeMessageVO.getTradeIdentifier(), payload, errors);
@@ -62,11 +63,11 @@ public class TradeMessageController {
 		TradeMessage message = new TradeMessage();
 		message.setMessage(payload);
 		message.setTradeId(tradeId);
+		message.setTradeMessageStatus("S");
 		if (errors != null && !errors.isEmpty()) {
 			message.setTradeMessageError(getString(errors));
 			message.setTradeMessageStatus("F");
 		}
-		message.setTradeMessageStatus("S");
 		tradeMessageRepository.save(message);
 	}
 
@@ -133,9 +134,10 @@ public class TradeMessageController {
 	 * @return
 	 */
 	public TradeListVO findAllTrades() {
-		TradeListVO tradeListVO = new TradeListVO();
-		Iterable<Trade> trades = tradeRepository.findAll();
+		TradeListVO tradeListVO = new TradeListVO();			
+		List<Trade> trades = (List<Trade>) tradeRepository.findAll();
 		if (trades != null) {
+			tradeListVO.setTrades(new ArrayList<>());
 			trades.forEach(t -> {
 				tradeListVO.getTrades().add(populateTradeDisplayVO(t));
 			});
@@ -143,6 +145,7 @@ public class TradeMessageController {
 
 		List<TradeMessage> tradeMessages = tradeMessageRepository.findByStatus("F");
 		if (tradeMessages != null && !tradeMessages.isEmpty()) {
+			tradeListVO.setTradeErrors(new ArrayList<>());
 			tradeMessages.forEach(t -> {
 				tradeListVO.getTradeErrors().add(populateTradeErrorVO(t));
 			});
