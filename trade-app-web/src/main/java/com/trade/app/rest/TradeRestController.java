@@ -1,10 +1,9 @@
 package com.trade.app.rest;
 
-import java.sql.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,15 +18,8 @@ public class TradeRestController {
 	private TradeMessageController controller;
 
 	@PostMapping(path= "/save", consumes = "application/json", produces = "application/json")
-	public void saveTrade(TradeMessageVO tradeMessageVO) {
-		TradeMessageVO t = new TradeMessageVO();
-		t.setCountryPartyIdentifier("A");
-		t.setVersion(1);
-		t.setLastupdateUser("test");
-		t.setCreatedDate(String.valueOf(new Date(679797)));
-		t.setTradeIdentifier("T1");
-		t.setBookingIdentifier("B1");
-		controller.publishTradeMessage(t);
+	public void saveTrade(@RequestBody TradeMessageVO tradeMessageVO) {
+		controller.publishTradeMessage(tradeMessageVO);
 	}
 	
 	@GetMapping(path= "/list",produces = "application/json")
