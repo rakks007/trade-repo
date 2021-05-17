@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Trade } from 'src/app/models/trade.model';
+import { TradeList } from 'src/app/models/trade-list.model';
 import { TradeService } from 'src/app/services/trade.service';
 
 @Component({
@@ -9,8 +9,8 @@ import { TradeService } from 'src/app/services/trade.service';
 })
 export class TradeListComponent implements OnInit {
 
-  trades?: Trade[];
-  currentTrade?: Trade;
+  trade?: TradeList;
+  currentTrade?: TradeList;
   currentIndex = -1;
   tradeId = '';
   constructor(private tradeService: TradeService) { }
@@ -23,7 +23,7 @@ export class TradeListComponent implements OnInit {
     this.tradeService.getAll()
       .subscribe(
         data => {
-          this.trades = data;
+          this.trade = data;
           console.log(data);
         },
         error => {
@@ -37,7 +37,7 @@ export class TradeListComponent implements OnInit {
     this.currentIndex = -1;
   }
 
-  setActiveTrade(trade: Trade, index: number): void {
+  setActiveTrade(trade: TradeList, index: number): void {
     this.currentTrade = trade;
     this.currentIndex = index;
   }

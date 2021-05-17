@@ -20,9 +20,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @SequenceGenerator(name="trade_msg_sequence", initialValue=1, allocationSize=10000)
-
-public class TradeMessage {
-	
+public class TradeMessage {	
 	@Column(name="message_id")
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="trade_sequence")
@@ -38,8 +36,5 @@ public class TradeMessage {
 	private String tradeMessageStatus;
 	
 	@Column(name="message_errors",columnDefinition="TEXT")
-	private String tradeMessageError;
-	
-	
-	
+	private String tradeMessageError;	
 }

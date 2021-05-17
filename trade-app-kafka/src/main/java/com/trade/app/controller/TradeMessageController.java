@@ -49,6 +49,8 @@ public class TradeMessageController {
 		List<ErrorVO> errors = TradeMessageValidator.validate(tradeMessageVO);
 		if (errors == null || errors.isEmpty()) {
 			populateTradeAndSave(tradeMessageVO);
+			
+			
 		}
 		populateTradeMessageAndSave(tradeMessageVO.getTradeIdentifier(), payload, errors);
 	}
@@ -94,6 +96,11 @@ public class TradeMessageController {
 		Trade trade = populateTrade(tradeMessageVO);
 		tradeRepository.save(trade);
 	}
+	
+	findby three record == 1
+			
+			compare all the fields in message
+			
 
 	/**
 	 * 

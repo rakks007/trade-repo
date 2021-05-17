@@ -1,6 +1,14 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<app-header></app-header>
 <div class="container">
-  <router-outlet></router-outlet>
+  <div class="header">
+  <nav>
+    <a routerLink="/list" routerLinkActive="active">List Trades</a>
+    <a routerLink="/add" routerLinkActive="active">Add Trade</a>
+  </nav>
+  </div>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="footer">
+    <h2>footer</h2>
+  </div>
 </div>
-<!--<app-footer></app-footer>-->
